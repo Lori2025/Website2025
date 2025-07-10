@@ -1,0 +1,7 @@
+# Block all web crawlers from indexing the site
+User-agent: *
+Disallow: /
+
+
+# Add: <meta name="robots" content="noindex, nofollow">
+# top of each .html page

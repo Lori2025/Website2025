@@ -1,2 +1,80 @@
 <meta name="robots" content="noindex, nofollow">
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hicks Realty | New Construction, Your Way</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div id="header-placeholder"></div>
+  <script>
+    fetch("partials/header-home.html")
+      .then(res => res.text())
+      .then(html => document.getElementById("header-placeholder").innerHTML = html);
+  </script>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Your Advocate in New Construction</h1>
+      <p>Serving first-time buyers, land buyers & sellers in the Central Valley</p>
+      <a href="#lead-magnet" class="cta-btn">Get the Free Guide</a>
+    </div>
+  </section>
+
+  <!-- Lead Magnet -->
+  <section id="lead-magnet" class="lead-magnet" style="text-align:center; padding:2rem;">
+    <h2>📘 Free PDF: New Construction Buyer’s Guide</h2>
+    <p>Enter your email to get the guide instantly.</p>
+    <form style="margin-top: 1rem;">
+      <input type="email" placeholder="Your email address" required />
+      <button type="submit">Send Me the Guide →</button>
+    </form>
+  </section>
+
+  <!-- Map Preview -->
+  <section class="map-preview" style="padding: 2rem;">
+    <h2 style="text-align:center;">🗺 Preview the Central Valley</h2>
+    <p style="text-align:center;">Find active new construction by city</p>
+    <div id="map" style="height: 300px; border-radius: 8px;"></div>
+  </section>
+
+  <!-- Feature Blocks -->
+  <section class="feature-blocks" style="padding: 2rem;">
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:1rem;">
+      <div class="feature-card"><h3>🛍 For Buyers</h3><p>Get expert help comparing builders, plans, and prices.</p></div>
+      <div class="feature-card"><h3>📦 For Sellers</h3><p>Sell your home fast so you can move into your new build stress-free.</p></div>
+      <div class="feature-card"><h3>🏗 Deals</h3><p>Explore exclusive incentives and builder discounts.</p></div>
+      <div class="feature-card"><h3>🌴 Tulare Life</h3><p>Check out the best food, events, parks, and lifestyle perks.</p></div>
+    </div>
+  </section>
+
+  <!-- Testimonials + YouTube -->
+  <section class="testimonials" style="padding: 2rem; background: #f8f8f8;">
+    <h2 style="text-align:center;">🎥 Hear From My Clients</h2>
+    <div class="media-grid">
+      <iframe width="100%" height="200" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+      <blockquote>“I never would have gotten the deal I got without your guidance.” – Happy Buyer</blockquote>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div id="footer-placeholder"></div>
+  <script>
+    fetch("partials/footer.html")
+      .then(res => res.text())
+      .then(html => document.getElementById("footer-placeholder").innerHTML = html);
+  </script>
+
+  <!-- Leaflet Scripts -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script type="module" src="js/map.js"></script>
+
+</body>
+</html>

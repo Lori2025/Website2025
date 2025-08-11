@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cities | New Construction in Tulare County — Lori Dunagan</title>
+  <meta name="description" content="Browse Tulare County cities to explore new construction communities and builders with Lori Dunagan." />
+  <link rel="stylesheet" href="/assets/css/global.css" />
+</head>
+<body>
+  <!-- Inline Navbar (same style as Home) -->
+  <header class="nav">
+    <div class="container nav__inner">
+      <a class="brand" href="/">Lori Dunagan</a>
+      <nav class="nav__links" id="main-nav">
+        <a href="/cities/" class="is-active" aria-current="page">Cities</a>
+        <a href="/builders/">Builders</a>
+        <a href="/index.html#lead-magnet">Free Guide</a>
+        <a class="btn btn--sm" href="/contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Page Intro -->
+  <section class="section" id="intro">
+    <div class="container">
+      <h1 class="section__title">Explore New Homes by City</h1>
+      <p class="section__sub">Select a city to see communities, builders, maps, and local insights.</p>
+    </div>
+  </section>
+
+  <!-- City Grid (hydrated by JS) -->
+  <section class="section" id="city-directory">
+    <div class="container">
+      <div class="grid grid--cities" id="cities-grid"></div>
+    </div>
+  </section>
+
+  <!-- Inline Footer -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div>© <span id="year"></span> Lori Dunagan — Tulare County</div>
+      <nav class="footer__links">
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/things-to-do.html">Things To Do</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script defer src="/assets/js/pages/cities-index.js"></script>
+</body>
+</html>

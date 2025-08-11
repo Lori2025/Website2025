@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "cities": [
+    {
+      "id": "city_tulare",
+      "slug": "tulare",
+      "name": "Tulare",
+      "heroImage": "/assets/images/cities/tulare-hero.webp",
+      "stats": { "population": 70500, "medianPrice": 385000, "schools": 20, "commute": "28 min" }
+    },
+    {
+      "id": "city_visalia",
+      "slug": "visalia",
+      "name": "Visalia",
+      "heroImage": "/assets/images/cities/visalia-hero.webp",
+      "stats": { "population": 143000, "medianPrice": 420000, "schools": 45, "commute": "24 min" }
+    },
+    {
+      "id": "city_porterville",
+      "slug": "porterville",
+      "name": "Porterville",
+      "heroImage": "/assets/images/cities/porterville-hero.webp",
+      "stats": { "population": 63000, "medianPrice": 350000, "schools": 18, "commute": "27 min" }
+    }
+  ]
+}

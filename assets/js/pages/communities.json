@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "communities": [
+    { "id": "c_mission_oaks", "slug": "mission-oaks", "cityId": "city_tulare", "builderId": "b_kb", "name": "Mission Oaks", "status": "Selling", "lat": 36.207, "lng": -119.347 },
+    { "id": "c_sequoia_grove", "slug": "sequoia-grove", "cityId": "city_visalia", "builderId": "b_lennar", "name": "Sequoia Grove", "status": "Coming Soon", "lat": 36.327, "lng": -119.313 },
+    { "id": "c_ranch_view", "slug": "ranch-view", "cityId": "city_porterville", "builderId": "b_drhorton", "name": "Ranch View", "status": "Selling", "lat": 36.064, "lng": -119.035 },
+    { "id": "c_tulare_meadows", "slug": "tulare-meadows", "cityId": "city_tulare", "builderId": "b_sjv", "name": "Tulare Meadows", "status": "Quick Move-Ins", "lat": 36.187, "lng": -119.342 },
+    { "id": "c_riverbend", "slug": "riverbend", "cityId": "city_visalia", "builderId": "b_woodside", "name": "Riverbend", "status": "Selling", "lat": 36.318, "lng": -119.284 },
+    { "id": "c_orchard_point", "slug": "orchard-point", "cityId": "city_visalia", "builderId": "b_kb", "name": "Orchard Point", "status": "Model Open", "lat": 36.312, "lng": -119.339 },
+    { "id": "c_sierra_fields", "slug": "sierra-fields", "cityId": "city_porterville", "builderId": "b_sjv", "name": "Sierra Fields", "status": "Sold Out", "lat": 36.070, "lng": -119.080 },
+    { "id": "c_willow_creek", "slug": "willow-creek", "cityId": "city_tulare", "builderId": "b_drhorton", "name": "Willow Creek", "status": "Selling", "lat": 36.212, "lng": -119.320 },
+    { "id": "c_redwood_place", "slug": "redwood-place", "cityId": "city_visalia", "builderId": "b_lennar", "name": "Redwood Place", "status": "Coming Soon", "lat": 36.341, "lng": -119.280 },
+    { "id": "c_pioneer_hills", "slug": "pioneer-hills", "cityId": "city_tulare", "builderId": "b_woodside", "name": "Pioneer Hills", "status": "Selling", "lat": 36.199, "lng": -119.360 }
+  ]
+}

@@ -72,3 +72,56 @@ img { max-width: 100%; display: block; }
   .hero__grid { grid-template-columns: 1fr; }
   .hero__art { height: 180px; }
 }
+/* City card (detailed) */
+.city-card--wide {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 18px;
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid var(--stroke);
+  background: var(--card);
+  text-decoration: none;
+  color: var(--text);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
+.city-card--wide:hover { transform: translateY(-1px); transition: transform .15s ease; }
+
+.city-card__media img {
+  width: 120px; height: 120px;
+  object-fit: cover;
+  border-radius: 12px;
+  background: #0f1117;
+}
+
+.city-card__name { margin: 0 0 6px; font-size: 32px; line-height: 1.1; }
+.city-card__tagline { color: var(--muted); margin: 0 0 10px; font-size: 18px; }
+
+.city-card__stats { display: grid; gap: 6px; font-size: 18px; }
+.city-card__stats strong { font-weight: 800; }
+
+@media (max-width: 640px) {
+  .city-card--wide { grid-template-columns: 84px 1fr; }
+  .city-card__media img { width: 84px; height: 84px; }
+  .city-card__name { font-size: 24px; }
+  .city-card__tagline, .city-card__stats { font-size: 16px; }
+}
+/* On the Cities index page, make the grid single-column */
+#cities-grid { 
+  grid-template-columns: 1fr !important; 
+  gap: 24px;
+}
+
+/* (optional) ensure any wide card spans the whole row */
+#cities-grid .city-card--wide { 
+  grid-column: 1 / -1; 
+}
+.city-card__name,
+.city-card__tagline { 
+  word-break: break-word; 
+}
+
+.city-card__media img {
+  display: block;          /* prevents inline gap */
+  width: 120px; height: 120px; object-fit: cover; border-radius: 12px;
+}

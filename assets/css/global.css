@@ -107,15 +107,10 @@ img { max-width: 100%; display: block; }
   .city-card__tagline, .city-card__stats { font-size: 16px; }
 }
 /* On the Cities index page, make the grid single-column */
-#cities-grid { 
-  grid-template-columns: 1fr !important; 
-  gap: 24px;
-}
+
 
 /* (optional) ensure any wide card spans the whole row */
-#cities-grid .city-card--wide { 
-  grid-column: 1 / -1; 
-}
+
 .city-card__name,
 .city-card__tagline { 
   word-break: break-word; 
@@ -124,4 +119,23 @@ img { max-width: 100%; display: block; }
 .city-card__media img {
   display: block;          /* prevents inline gap */
   width: 120px; height: 120px; object-fit: cover; border-radius: 12px;
+}
+
+/* --- Cities index only layout (scoped) --- */
+#city-directory #cities-grid {
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+#city-directory .city-card--wide {
+  grid-column: 1 / -1;
+}
+
+/* Consolidated media image sizing (cards) */
+.city-card__media img {
+  display: block;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 12px;
+  background: #0f1117;
 }

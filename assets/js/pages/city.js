@@ -88,7 +88,6 @@ function renderCommunities(list, builders) {
     mount.innerHTML = `<div class="container"><div class="card">No communities listed yet.</div></div>`;
     return;
   }
-  // Group by builder for readability
   const nameOf = id => builders.find(b => b.id === id)?.name || 'Builder';
   const groups = {};
   for (const c of list) (groups[c.builderId] ||= []).push(c);
@@ -136,7 +135,6 @@ function renderBuilders(builders) {
 function renderFAQ(city) {
   const mount = document.getElementById('city-faq');
   if (!mount) return;
-  // Simple defaults; swap with city-specific later
   const faqs = [
     { q: `Can I use FHA or VA loans in ${city.name}?`, a: 'Yes—most builders here accept government-backed financing.' },
     { q: 'Are there down-payment assistance programs?', a: 'Often yes, especially for first-time buyers in Tulare County.' },

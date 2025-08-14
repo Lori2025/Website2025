@@ -8,18 +8,8 @@
   <link rel="stylesheet" href="/assets/css/global.css" />
 </head>
 <body>
-  <!-- Inline Navbar (same style as Home) -->
-  <header class="nav">
-    <div class="container nav__inner">
-      <a class="brand" href="/">Lori Dunagan</a>
-      <nav class="nav__links" id="main-nav">
-        <a href="/cities/" class="is-active" aria-current="page">Cities</a>
-        <a href="/builders/">Builders</a>
-        <a href="/index.html#lead-magnet">Free Guide</a>
-        <a class="btn btn--sm" href="/contact.html">Contact</a>
-      </nav>
-    </div>
-  </header>
+  <!-- Shared header -->
+  <div id="header-placeholder"></div>
 
   <!-- Page Intro -->
   <section class="section" id="intro">
@@ -36,20 +26,11 @@
     </div>
   </section>
 
-  <!-- Inline Footer -->
-  <footer class="footer">
-    <div class="container footer__inner">
-      <div>© <span id="year"></span> Lori Dunagan — Tulare County</div>
-      <nav class="footer__links">
-        <a href="/about.html">About</a>
-        <a href="/contact.html">Contact</a>
-        <a href="/things-to-do.html">Things To Do</a>
-      </nav>
-    </div>
-  </footer>
+  <!-- Shared footer -->
+  <div id="footer-placeholder"></div>
 
-  <!-- Scripts -->
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <!-- Scripts (order matters) -->
+  <script defer src="/assets/partials/include.js"></script>
   <script defer src="/assets/js/pages/cities-index.js"></script>
 </body>
 </html>

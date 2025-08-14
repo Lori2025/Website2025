@@ -1,136 +1,159 @@
-<meta name="robots" content="noindex, nofollow">
-
+<meta content="noindex, nofollow" name="robots"/>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Lori Dunagan | New Construction in Tulare County</title>
-  <meta name="description" content="Compare builders, explore new construction communities, and buy with confidence in Tulare County — with Lori Dunagan as your advocate." />
-
-  <!-- Styles -->
-  <link rel="stylesheet" href="/assets/css/global.css" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-</head>
-<body>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+   <title>
+    Lori Dunagan | New Construction in Tulare County
+   </title>
+   <meta content="Compare builders, explore new construction communities, and buy with confidence in Tulare County — with Lori Dunagan as your advocate." name="description"/>
+   <!-- Styles -->
+   <link href="/assets/css/global.css" rel="stylesheet"/>
+   <link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet"/>
+  </meta>
+ </head>
+ <body>
   <!-- Navbar (inline, no partials) -->
-  <header class="nav">
-    <div class="container nav__inner">
-      <a class="brand" href="/">Lori Dunagan</a>
-      <nav class="nav__links">
-        <a href="/cities/">Cities</a>
-        <a href="/builders/">Builders</a>
-        <a href="#lead-magnet">Free Guide</a>
-        <a class="btn btn--sm" href="/contact.html">Contact</a>
-      </nav>
-    </div>
-  </header>
-
+  <div id="header-placeholder">
+  </div>
   <!-- Hero -->
   <section class="hero" id="hero">
-    <div class="container hero__grid">
-      <div class="hero__copy">
-        <h1>New Construction, Without the Guesswork</h1>
-        <p>Compare plans, incentives, and timelines across Tulare County — with a pro in your corner.</p>
-        <div class="hero__cta">
-          <a class="btn" href="/cities/">Browse Communities</a>
-          <a class="btn btn--ghost" href="#lead-magnet">Get the Buyer’s Guide</a>
-        </div>
-      </div>
-      <div class="hero__art" aria-hidden="true"></div>
+   <div class="container hero__grid">
+    <div class="hero__copy">
+     <h1>
+      New Construction, Without the Guesswork
+     </h1>
+     <p>
+      Compare plans, incentives, and timelines across Tulare County — with a pro in your corner.
+     </p>
+     <div class="hero__cta">
+      <a class="btn" href="/cities/">
+       Browse Communities
+      </a>
+      <a class="btn btn--ghost" href="#lead-magnet">
+       Get the Buyer’s Guide
+      </a>
+     </div>
     </div>
+    <div aria-hidden="true" class="hero__art">
+    </div>
+   </div>
   </section>
-
   <!-- Featured Cities (hydrated by JS) -->
   <section class="section" id="featured-cities">
-    <div class="container">
-      <h2 class="section__title">Explore Tulare County</h2>
-      <div class="grid grid--cities" id="cities-grid"></div>
+   <div class="container">
+    <h2 class="section__title">
+     Explore Tulare County
+    </h2>
+    <div class="grid grid--cities" id="cities-grid">
     </div>
+   </div>
   </section>
-
   <!-- Map Preview (hydrated by JS) -->
   <section class="section section--alt" id="mini-map">
-    <div class="container">
-      <h2 class="section__title">What’s Active Right Now</h2>
-      <p class="section__sub">Quick preview of active and coming‑soon communities.</p>
-      <div id="map" class="map"></div>
-      <div id="map-fallback" class="map-fallback" hidden>
-        Map preview unavailable. Check your connection.
-      </div>
+   <div class="container">
+    <h2 class="section__title">
+     What’s Active Right Now
+    </h2>
+    <p class="section__sub">
+     Quick preview of active and coming‑soon communities.
+    </p>
+    <div class="map" id="map">
     </div>
+    <div class="map-fallback" hidden="" id="map-fallback">
+     Map preview unavailable. Check your connection.
+    </div>
+   </div>
   </section>
-
   <!-- How it Works -->
   <section class="section" id="how-it-works">
-    <div class="container">
-      <h2 class="section__title">How It Works</h2>
-      <div class="grid grid--steps">
-        <div class="card step">
-          <h3>1) Tell me your goals</h3>
-          <p>Budget, timing, neighborhoods, non‑negotiables.</p>
-        </div>
-        <div class="card step">
-          <h3>2) Compare builders</h3>
-          <p>Plans, lots, incentives, and timelines across the county.</p>
-        </div>
-        <div class="card step">
-          <h3>3) Close with confidence</h3>
-          <p>I handle the details. You enjoy the keys.</p>
-        </div>
-      </div>
+   <div class="container">
+    <h2 class="section__title">
+     How It Works
+    </h2>
+    <div class="grid grid--steps">
+     <div class="card step">
+      <h3>
+       1) Tell me your goals
+      </h3>
+      <p>
+       Budget, timing, neighborhoods, non‑negotiables.
+      </p>
+     </div>
+     <div class="card step">
+      <h3>
+       2) Compare builders
+      </h3>
+      <p>
+       Plans, lots, incentives, and timelines across the county.
+      </p>
+     </div>
+     <div class="card step">
+      <h3>
+       3) Close with confidence
+      </h3>
+      <p>
+       I handle the details. You enjoy the keys.
+      </p>
+     </div>
     </div>
+   </div>
   </section>
-
   <!-- Builder Logos (hydrated by JS) -->
   <section class="section section--tight" id="builder-strip">
-    <div class="container">
-      <h2 class="section__title">Builders You’ll See</h2>
-      <div class="logo-row" id="builder-logos"></div>
+   <div class="container">
+    <h2 class="section__title">
+     Builders You’ll See
+    </h2>
+    <div class="logo-row" id="builder-logos">
     </div>
+   </div>
   </section>
-
   <!-- Social Proof -->
   <section class="section section--alt" id="social-proof">
-    <div class="container">
-      <h2 class="section__title">Clients on Working with Lori</h2>
-      <blockquote class="quote">“Lori made new construction simple — and saved us money.”</blockquote>
-      <div class="video">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="Client story" frameborder="0" allowfullscreen></iframe>
-      </div>
+   <div class="container">
+    <h2 class="section__title">
+     Clients on Working with Lori
+    </h2>
+    <blockquote class="quote">
+     “Lori made new construction simple — and saved us money.”
+    </blockquote>
+    <div class="video">
+     <iframe allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="Client story" width="560">
+     </iframe>
     </div>
+   </div>
   </section>
-
   <!-- Lead Magnet -->
   <section class="section" id="lead-magnet">
-    <div class="container">
-      <div class="card lead">
-        <h2>📘 Free New Construction Buyer’s Guide</h2>
-        <p>Get Lori’s step‑by‑step playbook for Tulare County buys.</p>
-        <form action="https://formspree.io/f/YOUR_ID" method="POST" class="lead__form">
-          <input type="email" name="email" placeholder="Your email" required />
-          <input type="hidden" name="source" value="homepage" />
-          <button class="btn" type="submit">Send the Guide →</button>
-        </form>
-      </div>
+   <div class="container">
+    <div class="card lead">
+     <h2>
+      📘 Free New Construction Buyer’s Guide
+     </h2>
+     <p>
+      Get Lori’s step‑by‑step playbook for Tulare County buys.
+     </p>
+     <form action="https://formspree.io/f/YOUR_ID" class="lead__form" method="POST">
+      <input name="email" placeholder="Your email" required="" type="email"/>
+      <input name="source" type="hidden" value="homepage"/>
+      <button class="btn" type="submit">
+       Send the Guide →
+      </button>
+     </form>
     </div>
+   </div>
   </section>
-
   <!-- Footer (inline) -->
-  <footer class="footer">
-    <div class="container footer__inner">
-      <div>© <span id="year"></span> Lori Dunagan — Tulare County</div>
-      <nav class="footer__links">
-        <a href="/about.html">About</a>
-        <a href="/contact.html">Contact</a>
-        <a href="/things-to-do.html">Things to Do</a>
-      </nav>
-    </div>
-  </footer>
-
+  <div id="footer-placeholder">
+  </div>
+  <script defer="" src="/assets/partials/include.js">
+  </script>
   <!-- Scripts -->
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script defer src="/assets/js/pages/home.js"></script>
-</body>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+  </script>
+  <script defer="" src="/assets/js/pages/home.js">
+  </script>
+ </body>
 </html>

@@ -1,15 +1,11 @@
 // /assets/js/pages/city.js
-// Reused by ALL /cities/<slug>/index.html pages
+// Shared logic for /cities/<slug>/ pages
 
 (async function initCityPage() {
-  const slug = getCitySlug();
-  if (!slug) {
-    console.error('City slug not found in URL.');
-    renderError('City not found.');
-    return;
-  }
+  const slug = getSlugFromPath();
+  if (!slug) return renderError('City not found in URL.');
 
-  // Load datasets
+  // Load data
   const [citiesData, buildersData, communitiesData] = await Promise.all([
     fetch('/data/cities.json').then(r => r.json()).catch(() => ({ cities: [] })),
     fetch('/data/builders.json').then(r => r.json()).catch(() => ({ builders: [] })),
@@ -21,100 +17,166 @@
   const communities = communitiesData.communities || [];
 
   const city = cities.find(c => c.slug === slug);
-  if (!city) {
-    renderError('City not found in data.');
-    return;
-  }
+  if (!city) return renderError('City not found in data.');
 
-  // Filter communities by city
   const cityCommunities = communities.filter(c => c.cityId === city.id);
-
-  // Group communities by builderId
-  const byBuilder = cityCommunities.reduce((acc, c) => {
-    (acc[c.builderId] ||= []).push(c);
-    return acc;
-  }, {});
+  const builderIds = Array.from(new Set(cityCommunities.map(c => c.builderId)));
+  const buildersInCity = builders.filter(b => builderIds.includes(b.id));
 
   renderHero(city);
-  renderQuickStats(city, cityCommunities);
-  renderCommunities(byBuilder, builders);
+  renderStats(city, cityCommunities);
+  renderCommunities(cityCommunities, builders);
+  renderBuilders(buildersInCity);
+  renderFAQ(city);
+  renderMap(cityCommunities);
+
+  enhanceSubnav();
 })();
 
-function getCitySlug() {
-  // Robustly find the slug after the 'cities' segment, works for GH Pages too
-  const segments = location.pathname.split('/').filter(Boolean);
-  const i = segments.indexOf('cities');
-  if (i >= 0 && i + 1 < segments.length) return segments[i + 1];
-  // Fallback to query param
-  return new URLSearchParams(location.search).get('slug');
+function getSlugFromPath() {
+  const parts = location.pathname.split('/').filter(Boolean);
+  const i = parts.indexOf('cities');
+  return (i >= 0 && parts[i + 1]) ? parts[i + 1] : null;
 }
 
-function el(id) { return document.getElementById(id); }
-
 function renderError(msg) {
-  const mount = el('city-root');
-  if (mount) mount.innerHTML = `<div class="card">${msg}</div>`;
+  const mount = document.getElementById('city-hero');
+  if (mount) mount.innerHTML = `<div class="container"><div class="card">${msg}</div></div>`;
 }
 
 function renderHero(city) {
-  const img = city.heroImage || '/assets/images/cities/placeholder.webp';
-  el('city-hero').innerHTML = `
-    <div class="container" style="padding:28px 0;">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center;">
-        <div>
-          <h1 style="margin:0 0 6px;">${city.name}</h1>
-          ${city.tagline ? `<p class="section__sub" style="margin:0;">${city.tagline}</p>` : ''}
-        </div>
-        <div>
-          <img src="${img}" alt="${city.name}" style="width:100%;max-height:260px;object-fit:cover;border-radius:14px;border:1px solid var(--stroke);">
-        </div>
+  const hero = document.getElementById('city-hero');
+  if (!hero) return;
+  const bg = city.heroImage || '/assets/images/cities/placeholder.webp';
+  const tags = city.tags && city.tags.length ? city.tags : [];
+  hero.innerHTML = `
+    <div class="city-hero__bg" style="background-image:url('${bg}')"></div>
+    <div class="container city-hero__inner">
+      <div class="city-hero__copy">
+        <h1>${city.name}</h1>
+        ${city.tagline ? `<p class="section__sub">${city.tagline}</p>` : ``}
+        ${tags.length ? `<div class="chip-row">${tags.slice(0,5).map(t => `<span class="chip">${t}</span>`).join('')}</div>` : ``}
       </div>
-    </div>`;
+    </div>
+  `;
 }
 
-function renderQuickStats(city, cityCommunities) {
-  const bCount = city.buildersCount ?? '-';
-  const cCount = city.communitiesCount ?? cityCommunities.length ?? '-';
-  const price = city.priceRange ?? '-';
+function renderStats(city, cityCommunities) {
+  const mount = document.getElementById('city-stats');
+  if (!mount) return;
+  const buildersCount = city.buildersCount ?? new Set(cityCommunities.map(c => c.builderId)).size ?? '-';
+  const communitiesCount = city.communitiesCount ?? cityCommunities.length ?? '-';
+  const price = city.priceRange ?? '—';
+  const pop = city.stats?.population ? city.stats.population.toLocaleString() : '—';
 
-  el('city-stats').innerHTML = `
+  mount.innerHTML = `
     <div class="container">
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
-        <div class="card"><div><strong>Builders</strong><div style="font-size:22px;font-weight:800;">${bCount}</div></div></div>
-        <div class="card"><div><strong>Communities</strong><div style="font-size:22px;font-weight:800;">${cCount}</div></div></div>
-        <div class="card"><div><strong>Price Range</strong><div style="font-size:22px;font-weight:800;">${price}</div></div></div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
+        <div class="stat card"><div class="stat__label">Builders</div><div class="stat__value">${buildersCount}</div></div>
+        <div class="stat card"><div class="stat__label">Communities</div><div class="stat__value">${communitiesCount}</div></div>
+        <div class="stat card"><div class="stat__label">Price Range</div><div class="stat__value">${price}</div></div>
+        <div class="stat card"><div class="stat__label">Population</div><div class="stat__value">${pop}</div></div>
       </div>
-    </div>`;
+    </div>
+  `;
 }
 
-function renderCommunities(byBuilder, builders) {
-  const mount = el('city-communities');
-  const builderName = id => (builders.find(b => b.id === id)?.name) || 'Builder';
+function renderCommunities(list, builders) {
+  const mount = document.getElementById('city-communities');
+  if (!mount) return;
+  if (!list.length) {
+    mount.innerHTML = `<div class="container"><div class="card">No communities listed yet.</div></div>`;
+    return;
+  }
+  // Group by builder for readability
+  const nameOf = id => builders.find(b => b.id === id)?.name || 'Builder';
+  const groups = {};
+  for (const c of list) (groups[c.builderId] ||= []).push(c);
 
-  const sections = Object.keys(byBuilder).sort().map(bId => {
-    const list = byBuilder[bId]
-      .map(c => communityRow(c, builderName(bId)))
-      .join('');
+  const sections = Object.keys(groups).map(bid => {
+    const rows = groups[bid].map(c => {
+      const status = c.status ? `<span class="pill">${c.status}</span>` : '';
+      return `
+        <a class="row-card" href="/communities/template.html#id=${c.id}">
+          <div class="row-card__body">
+            <div class="row-card__title">${c.name}</div>
+            <div class="row-card__meta">${nameOf(bid)} ${status}</div>
+          </div>
+          <div class="row-card__cta">View →</div>
+        </a>`;
+    }).join('');
     return `
-      <section class="section" style="padding-top:28px;">
-        <div class="container">
-          <h2 class="section__title" style="margin-bottom:12px;">${builderName(bId)}</h2>
-          <div class="stack">${list}</div>
-        </div>
-      </section>`;
+      <div class="container" style="margin-bottom:22px;">
+        <h2 class="section__title" style="margin-bottom:12px;">${nameOf(bid)}</h2>
+        <div class="stack">${rows}</div>
+      </div>`;
   }).join('');
 
-  mount.innerHTML = sections || `<div class="container"><div class="card">No communities listed yet.</div></div>`;
+  mount.innerHTML = sections;
 }
 
-function communityRow(c, builderName) {
-  const status = c.status ? `<span class="pill">${c.status}</span>` : '';
-  return `
-    <a class="row-card" href="/communities/template.html#id=${c.id}">
-      <div class="row-card__body">
-        <div class="row-card__title">${c.name}</div>
-        <div class="row-card__meta">${builderName} ${status}</div>
+function renderBuilders(builders) {
+  const mount = document.getElementById('city-builders');
+  if (!mount) return;
+  if (!builders.length) {
+    mount.innerHTML = `<div class="container"><div class="card">No builder info yet.</div></div>`;
+    return;
+  }
+  const logos = builders.map(b => `
+    <div class="card" style="padding:12px;display:flex;align-items:center;justify-content:center;">
+      <img src="${b.logo || '/assets/images/builders/placeholder.webp'}" alt="${b.name}">
+    </div>`).join('');
+  mount.innerHTML = `
+    <div class="container">
+      <h2 class="section__title">Builders you’ll see in this city</h2>
+      <div class="logo-row">${logos}</div>
+    </div>`;
+}
+
+function renderFAQ(city) {
+  const mount = document.getElementById('city-faq');
+  if (!mount) return;
+  // Simple defaults; swap with city-specific later
+  const faqs = [
+    { q: `Can I use FHA or VA loans in ${city.name}?`, a: 'Yes—most builders here accept government-backed financing.' },
+    { q: 'Are there down-payment assistance programs?', a: 'Often yes, especially for first-time buyers in Tulare County.' },
+    { q: 'How soon can I move in?', a: 'Inventory homes may be move-in ready within 30 days; new builds vary by phase.' }
+  ];
+  mount.innerHTML = `
+    <div class="container">
+      <h2 class="section__title">FAQ</h2>
+      <div class="faq">
+        ${faqs.map(f => `
+          <details class="faq__item">
+            <summary>${f.q}</summary>
+            <div class="faq__a">${f.a}</div>
+          </details>`).join('')}
       </div>
-      <div class="row-card__cta">View →</div>
-    </a>`;
+    </div>`;
+}
+
+function renderMap(communities) {
+  const mapEl = document.getElementById('city-map');
+  const fallback = document.getElementById('map-fallback');
+  if (!mapEl) return;
+  if (!window.L) { if (fallback) fallback.hidden = false; return; }
+
+  const center = [36.21, -119.34];
+  const map = L.map(mapEl, { scrollWheelZoom: false }).setView(center, 10);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(map);
+
+  communities.forEach(c => {
+    if (typeof c.lat !== 'number' || typeof c.lng !== 'number') return;
+    L.marker([c.lat, c.lng]).addTo(map).bindPopup(`<strong>${c.name}</strong><br>${c.status || ''}`);
+  });
+}
+
+function enhanceSubnav() {
+  const nav = document.getElementById('city-subnav');
+  if (!nav) return;
+  const top = nav.offsetTop;
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > top) nav.classList.add('is-sticky');
+    else nav.classList.remove('is-sticky');
+  });
 }

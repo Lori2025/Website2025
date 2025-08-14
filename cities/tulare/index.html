@@ -2,20 +2,75 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Tulare — New Construction | Lori Dunagan</title>
-  <meta name="description" content="Explore new construction communities and builders in Tulare with Lori Dunagan." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Explore new construction communities, builders, and local insights for Tulare with Lori Dunagan." />
   <link rel="stylesheet" href="/assets/css/global.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
+  <!-- Shared header -->
   <div id="header-placeholder"></div>
 
-  <section id="city-hero" class="section section--alt"></section>
-  <section id="city-stats" class="section"></section>
-  <section id="city-communities" class="section"></section>
+  <!-- Hero with background image + chips -->
+  <section id="city-hero" class="city-hero section section--alt"></section>
 
+  <!-- Sticky sub-nav -->
+  <nav id="city-subnav" class="city-subnav">
+    <div class="container city-subnav__inner">
+      <a href="#overview">Overview</a>
+      <a href="#communities">Communities</a>
+      <a href="#builders">Builders</a>
+      <a href="#map">Map</a>
+      <a href="#faq">FAQ</a>
+    </div>
+  </nav>
+
+  <section id="overview" class="section">
+    <div id="city-stats"></div>
+  </section>
+
+  <section id="communities" class="section">
+    <div id="city-communities"></div>
+  </section>
+
+  <section id="builders" class="section section--alt">
+    <div id="city-builders"></div>
+  </section>
+
+  <section id="map" class="section">
+    <div class="container">
+      <h2 class="section__title">Tulare on the map</h2>
+      <p class="section__sub">Preview of communities; click pins for names and status.</p>
+      <div id="city-map" class="map"></div>
+      <div id="map-fallback" class="map-fallback" hidden>Map unavailable. Check your connection.</div>
+    </div>
+  </section>
+
+  <section id="faq" class="section section--alt">
+    <div id="city-faq"></div>
+  </section>
+
+  <section id="lead" class="section">
+    <div class="container">
+      <div class="card lead">
+        <h2>📘 Free New Construction Buyer’s Guide</h2>
+        <p>Get Lori’s step-by-step playbook for Tulare County.</p>
+        <form action="https://formspree.io/f/YOUR_ID" method="POST" class="lead__form">
+          <input type="email" name="email" placeholder="Your email" required />
+          <input type="hidden" name="source" value="city-tulare" />
+          <button class="btn" type="submit">Send the Guide →</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Shared footer -->
   <div id="footer-placeholder"></div>
-  <script defer src="/assets/js/partials/include.js"></script>
+
+  <!-- Scripts -->
+  <script defer src="/assets/partials/include.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script defer src="/assets/js/pages/city.js"></script>
 </body>
 </html>
